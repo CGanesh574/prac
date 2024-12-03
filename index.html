@@ -44,12 +44,21 @@
         button:hover {
             background: #4cae4c;
         }
+        #successMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2>Registration Form</h2>
-        <form>
+        <form id="registrationForm">
             <label for="fname">First Name</label>
             <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
 
@@ -73,8 +82,25 @@
             <label for="dob">Date of Birth</label>
             <input type="date" id="dob" name="dob" required>
 
-            <button type="submit">Register</button>
+            <button type="button" id="registerButton">Register</button>
         </form>
+        <div id="successMessage">Registration is successful!</div>
     </div>
+
+    <script>
+        document.getElementById('registerButton').addEventListener('click', function() {
+            const form = document.getElementById('registrationForm');
+            if (form.checkValidity()) {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+
+                // Optionally, clear the form
+                form.reset();
+            } else {
+                // Trigger built-in form validation
+                form.reportValidity();
+            }
+        });
+    </script>
 </body>
 </html>
